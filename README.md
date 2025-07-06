@@ -30,7 +30,7 @@ The contact form sends your message straight to me via Telegram bot — fast and
 
 ## 🔗 Live Demo
 
-[View Portfolio Live »](https://your-username.github.io/your-repo-name)
+[View Portfolio Live »] https://asthadixit1716.github.io/Portfolio/
 
 
 ---
