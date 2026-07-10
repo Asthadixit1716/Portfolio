@@ -9,17 +9,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#faf6ef;
-    --panel:#f2ede2;
-    --ink:#1f2b28;
-    --ink-soft:#5c6660;
-    --sage:#7c9885;
-    --sage-deep:#526b5b;
-    --pulse:#d6543f;
-    --line:#d9d1bf;
-    --ease:cubic-bezier(.16,.84,.44,1);
-  }
+
+  
+:root{
+  --paper:#090B0D;
+  --panel:#111417;
+  --ink:#F5F7F8;
+  --ink-soft:#A9B2B9;
+  --sage:#7EA98F;
+  --sage-deep:#9CC5A8;
+  --pulse:#FF5C57;
+  --line:#22292F;
+  --glow:rgba(255,92,87,.35);
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -173,6 +177,102 @@
     *{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
     #pulsePath{stroke-dashoffset:0 !important; transition:none;}
   }
+
+
+/* ===== Dark Theme Enhancements ===== */
+
+body{
+  background:var(--paper)!important;
+  color:var(--ink)!important;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background-image:
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:40px 40px;
+opacity:.35;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:700px;
+height:700px;
+left:50%;
+top:20%;
+transform:translateX(-50%);
+background:radial-gradient(circle,rgba(255,92,87,.08),transparent 70%);
+filter:blur(80px);
+pointer-events:none;
+z-index:-1;
+}
+
+header.top{
+background:rgba(9,11,13,.82)!important;
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.chart,.project-card,.contact-shell{
+background:var(--panel)!important;
+border:1px solid var(--line)!important;
+box-shadow:0 0 0 1px rgba(255,255,255,.02),0 25px 70px rgba(0,0,0,.45);
+}
+
+.btn-primary{
+background:var(--pulse)!important;
+box-shadow:0 12px 30px rgba(255,92,87,.35);
+}
+
+.btn-primary:hover{
+background:#ff7069!important;
+box-shadow:0 20px 45px rgba(255,92,87,.45);
+}
+
+.btn-ghost{
+background:#15191d;
+border-color:#2B343C!important;
+}
+
+#pulsePath{
+stroke:var(--pulse)!important;
+stroke-width:2.2;
+opacity:.95;
+filter:drop-shadow(0 0 8px var(--glow)) drop-shadow(0 0 18px var(--glow));
+}
+
+.project-visual{
+background:
+radial-gradient(circle at top,rgba(255,92,87,.22),transparent 60%),
+linear-gradient(135deg,#171B20,#0E1114)!important;
+}
+
+.field input,.field textarea{
+background:#0F1317!important;
+border-color:#2B343C!important;
+color:#fff!important;
+}
+
+.field input:focus,.field textarea:focus{
+border-color:var(--pulse)!important;
+box-shadow:0 0 0 4px rgba(255,92,87,.15);
+}
+
+.tl-wrap::before{
+background:linear-gradient(transparent,var(--pulse),transparent)!important;
+}
+
+.tl-item::before{
+background:var(--pulse)!important;
+box-shadow:0 0 0 5px rgba(255,92,87,.15),0 0 18px rgba(255,92,87,.45);
+}
+
 </style>
 </head>
 <body>
