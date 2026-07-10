@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Astha Dixit — MERN Stack Developer</title>
+<meta name="description" content="Astha Dixit · MERN stack developer · Kanpur, India" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf6ef;
+    --panel:#f2ede2;
+    --ink:#1f2b28;
+    --ink-soft:#5c6660;
+    --sage:#7c9885;
+    --sage-deep:#526b5b;
+    --pulse:#d6543f;
+    --line:#d9d1bf;
+    --ease:cubic-bezier(.16,.84,.44,1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'Inter',sans-serif; line-height:1.65;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--pulse); color:var(--paper);}
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:'Fraunces',serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  section{position:relative; z-index:1; padding:6rem 6vw; max-width:1140px; margin:0 auto;}
+  @media(max-width:720px){ section{padding:4rem 6vw;} }
+  :focus-visible{outline:2px solid var(--sage-deep); outline-offset:3px;}
+
+  /* ============ PULSE SPINE (signature element) ============ */
+  .pulse-svg{position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:visible;}
+  #pulsePath{
+    fill:none; stroke:var(--pulse); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:8000; stroke-dashoffset:8000; opacity:.55;
+    transition:stroke-dashoffset .08s linear;
+  }
+
+  /* ============ HEADER ============ */
+  header.top{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 6vw;
+    background:linear-gradient(180deg, rgba(250,246,239,.96), rgba(250,246,239,.75) 75%, transparent);
+    backdrop-filter:blur(4px);
+    border-bottom:1px solid transparent;
+  }
+  .brand{font-family:'Fraunces'; font-weight:600; font-size:1.05rem;}
+  .brand span{color:var(--ink-soft); font-weight:400; font-family:'IBM Plex Mono'; font-size:.72rem;}
+  nav.links{display:flex; gap:1.6rem;}
+  nav.links a{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.04em; color:var(--ink-soft); transition:color .2s;}
+  nav.links a:hover{color:var(--pulse);}
+  @media(max-width:820px){ nav.links{display:none;} }
+  .reading{font-family:'IBM Plex Mono'; font-size:.68rem; color:var(--sage-deep); letter-spacing:.05em; border:1px solid var(--sage); padding:.3rem .65rem; border-radius:20px;}
+
+  /* ============ HERO ============ */
+  #hero{min-height:100svh; display:flex; align-items:center; padding-top:6rem;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:2.8rem; align-items:center; width:100%;}
+  @media(max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--sage-deep); margin-bottom:1.3rem; display:flex; align-items:center; gap:.5rem;}
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--pulse); animation:beat 1.8s infinite;}
+  @keyframes beat{0%,100%{transform:scale(1); opacity:1;} 50%{transform:scale(1.5); opacity:.5;}}
+  .hero-title{font-size:clamp(2.3rem,5.4vw,4rem); font-weight:600; line-height:1.08; margin-bottom:1.1rem; letter-spacing:-.01em;}
+  .hero-title em{font-style:italic; color:var(--sage-deep); font-weight:500;}
+  .hero-sub{max-width:48ch; color:var(--ink-soft); font-size:1.02rem; margin-bottom:2rem;}
+  .hero-sub strong{color:var(--ink); font-weight:600;}
+  .cta-row{display:flex; gap:1rem; flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter'; font-weight:600; font-size:.85rem; padding:.85rem 1.5rem;
+    border-radius:30px; cursor:pointer; border:1px solid transparent; transition:transform .2s var(--ease), box-shadow .2s;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--sage-deep); color:var(--paper); box-shadow:0 8px 20px -8px rgba(82,107,91,.6);}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--pulse); color:var(--pulse);}
+
+  /* chart panel */
+  .chart{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.7rem; position:relative;
+  }
+  .chart-label{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:1rem;}
+  .chart-wave{width:100%; height:70px; margin-bottom:1rem;}
+  .chart-rows{display:flex; flex-direction:column;}
+  .chart-row{display:flex; justify-content:space-between; padding:.65rem 0; border-bottom:1px dashed var(--line); font-size:.85rem;}
+  .chart-row:last-child{border-bottom:none;}
+  .chart-row b{font-family:'IBM Plex Mono'; color:var(--sage-deep); font-weight:600;}
+  .chart-row span{color:var(--ink-soft);}
+
+  /* ============ SECTION HEAD ============ */
+  .sec-head{display:flex; align-items:baseline; gap:1rem; margin-bottom:2.6rem; flex-wrap:wrap;}
+  .sec-num{font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--pulse); border:1px solid var(--pulse); border-radius:50%; width:2.1rem; height:2.1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .sec-tag{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-soft); letter-spacing:.08em; text-transform:uppercase; margin-bottom:.2rem;}
+  .sec-head h2{font-size:clamp(1.5rem,3vw,2.1rem); font-weight:600;}
+
+  /* ============ ABOUT ============ */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:2.6rem;}
+  @media(max-width:840px){.about-grid{grid-template-columns:1fr;}}
+  .about-copy p{color:var(--ink-soft); margin-bottom:1.05rem; max-width:60ch;}
+  .about-copy strong{color:var(--ink);}
+  .vitals-list{display:flex; flex-direction:column;}
+  .vitals-row{display:flex; justify-content:space-between; padding:.8rem 0; border-bottom:1px solid var(--line); font-size:.85rem;}
+  .vitals-row b{font-family:'IBM Plex Mono'; color:var(--pulse);}
+  .vitals-row span{color:var(--ink-soft);}
+
+  /* ============ TIMELINE ============ */
+  .tl-wrap{position:relative; padding-left:2.4rem;}
+  .tl-wrap::before{content:''; position:absolute; left:6px; top:.3rem; bottom:.3rem; width:2px; background:linear-gradient(var(--sage), var(--pulse));}
+  .tl-item{position:relative; padding-bottom:2.8rem;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:''; position:absolute; left:-2.4rem; top:.3rem; width:12px; height:12px; border-radius:50%; background:var(--pulse); border:3px solid var(--paper); box-shadow:0 0 0 1px var(--pulse);}
+  .t-tag{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--sage-deep); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.4rem;}
+  .tl-item h3{font-size:1.3rem; font-weight:600; margin-bottom:.15rem;}
+  .t-org{color:var(--pulse); font-size:.85rem; font-weight:600; margin-bottom:.7rem;}
+  .tl-item p{color:var(--ink-soft); max-width:58ch; margin-bottom:.8rem;}
+  .chips{display:flex; gap:.5rem; flex-wrap:wrap;}
+  .chip{font-family:'IBM Plex Mono'; font-size:.68rem; padding:.28rem .6rem; border:1px solid var(--line); border-radius:20px; color:var(--ink-soft);}
+
+  /* ============ PROJECT (feature card) ============ */
+  .project-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:2.2rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center;
+  }
+  @media(max-width:760px){.project-card{grid-template-columns:1fr;}}
+  .project-visual{
+    aspect-ratio:4/3; border-radius:10px; background:
+      linear-gradient(135deg, var(--sage) 0%, var(--sage-deep) 100%);
+    position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;
+  }
+  .project-visual svg{width:70%; height:70%; opacity:.9;}
+  .project-tag{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--sage-deep); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.6rem;}
+  .project-card h3{font-size:1.5rem; margin-bottom:.7rem;}
+  .project-card p{color:var(--ink-soft); margin-bottom:1.1rem;}
+  .project-links{display:flex; gap:1.2rem; margin-bottom:1.1rem;}
+  .project-links a{font-size:.85rem; font-weight:600; color:var(--sage-deep); border-bottom:1px solid transparent;}
+  .project-links a:hover{border-color:var(--sage-deep);}
+
+  /* ============ SKILLS ============ */
+  .skill-cols{display:grid; grid-template-columns:repeat(4,1fr); gap:1.6rem;}
+  @media(max-width:900px){.skill-cols{grid-template-columns:repeat(2,1fr);}}
+  .skill-col h4{font-family:'IBM Plex Mono'; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--pulse); margin-bottom:1rem;}
+  .skill-col ul{list-style:none;}
+  .skill-col li{font-size:.88rem; color:var(--ink-soft); padding:.4rem 0; border-bottom:1px dashed var(--line);}
+  .skill-col li:last-child{border-bottom:none;}
+
+  /* ============ CONTACT ============ */
+  .contact-shell{
+    background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:2.4rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:2.4rem;
+  }
+  @media(max-width:760px){.contact-shell{grid-template-columns:1fr;}}
+  .field{margin-bottom:1.15rem;}
+  .field label{display:block; font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase; margin-bottom:.45rem;}
+  .field input, .field textarea{
+    width:100%; background:var(--paper); border:1px solid var(--line); color:var(--ink);
+    padding:.75rem .9rem; border-radius:8px; font-family:'Inter'; font-size:.9rem;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--pulse);}
+  .contact-side p{color:var(--ink-soft); margin-bottom:1.4rem; max-width:38ch;}
+  .contact-link-row{display:flex; align-items:center; gap:.8rem; padding:.85rem 0; border-bottom:1px solid var(--line); font-size:.9rem;}
+  .contact-link-row b{font-family:'IBM Plex Mono'; color:var(--sage-deep); font-size:.7rem; width:76px; flex-shrink:0;}
+
+  footer{text-align:center; padding:2.3rem; color:var(--ink-soft); font-size:.78rem; font-family:'IBM Plex Mono'; border-top:1px solid var(--line); position:relative; z-index:1;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+    #pulsePath{stroke-dashoffset:0 !important; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="pulse-svg" id="pulseSvg" viewBox="0 0 100 2900" preserveAspectRatio="none">
+  <path id="pulsePath" d="M 50,80
+    L 50,300 L 44,300 L 47,260 L 53,340 L 56,300 L 50,300
+    L 50,700 L 44,700 L 47,660 L 53,740 L 56,700 L 50,700
+    L 50,1150 L 44,1150 L 47,1110 L 53,1190 L 56,1150 L 50,1150
+    L 50,1650 L 44,1650 L 47,1610 L 53,1690 L 56,1650 L 50,1650
+    L 50,2100 L 44,2100 L 47,2060 L 53,2140 L 56,2100 L 50,2100
+    L 50,2550 L 44,2550 L 47,2510 L 53,2590 L 56,2550 L 50,2550
+    L 50,2850" />
+</svg>
+
+<header class="top">
+  <div class="brand">ASTHA DIXIT <span>/ mern developer</span></div>
+  <nav class="links">
+    <a href="#about">About</a>
+    <a href="#timeline">Experience</a>
+    <a href="#project">Project</a>
+    <a href="#skills">Stack</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="reading mono">READING <span id="readNum">0</span>/6</div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero" data-idx="1">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>OPEN TO OPPORTUNITIES · KANPUR, INDIA</div>
+        <h1 class="hero-title">Building software<br>that <em>takes care</em> of people.</h1>
+        <p class="hero-sub">MERN stack developer. I build full-stack apps end to end — <strong>React, Node, Express, MongoDB</strong> — with a habit of designing for the person who has to use the thing under pressure. My latest build is a healthcare app, made solo, start to finish.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#project">See the project</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="chart">
+        <div class="chart-label">// Current status</div>
+        <svg class="chart-wave" viewBox="0 0 300 70" preserveAspectRatio="none">
+          <polyline points="0,35 40,35 55,10 70,60 85,35 130,35 145,15 160,55 175,35 300,35"
+            fill="none" stroke="#d6543f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="chart-rows">
+          <div class="chart-row"><span>Stack</span><b>MongoDB · Express · React · Node</b></div>
+          <div class="chart-row"><span>Latest build</span><b>Healthcare App (solo)</b></div>
+          <div class="chart-row"><span>Background</span><b>Internship + Teaching</b></div>
+          <div class="chart-row"><span>Based in</span><b>Kanpur, India</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" data-idx="2">
+    <div class="sec-head"><span class="sec-num mono">02</span><div><div class="sec-tag">Overview</div><h2>A bit about the work</h2></div></div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>I work across the full MERN stack — <strong>React on the front end, Node and Express on the back, MongoDB underneath</strong> — building interfaces that stay usable when the content gets complicated, which is exactly what a healthcare tool demands.</p>
+        <p>Before this, I spent time both as a developer in training and as a teacher — two roles that both come down to the same thing: making something complicated easy for someone else to follow. That shows up in how I structure UI and API design now.</p>
+      </div>
+      <div class="vitals-list">
+        <div class="vitals-row"><span>Focus</span><b>Full-Stack MERN</b></div>
+        <div class="vitals-row"><span>Flagship project</span><b>Healthcare App</b></div>
+        <div class="vitals-row"><span>Experience</span><b>Internship + Teaching</b></div>
+        <div class="vitals-row"><span>Based in</span><b>Kanpur, India</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" data-idx="3">
+    <div class="sec-head"><span class="sec-num mono">03</span><div><div class="sec-tag">Chronology</div><h2>Experience</h2></div></div>
+    <div class="tl-wrap">
+      <div class="tl-item">
+        <div class="t-tag">Internship</div>
+        <h3>Software Development Intern</h3>
+        <div class="t-org">[ Internship company name ]</div>
+        <p>Worked hands-on across the MERN stack — building and integrating features, writing RESTful APIs, and working with MongoDB on real application data. <em style="color:var(--ink-soft); font-style:italic;">(Add specific projects or responsibilities here.)</em></p>
+        <div class="chips"><span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="t-tag">Teaching</div>
+        <h3>Teacher</h3>
+        <div class="t-org">[ School / institute name ]</div>
+        <p>Taught and mentored students, building the same skill that carries into development work: breaking down complex material into something a person can actually follow and use.</p>
+        <div class="chips"><span class="chip">Communication</span><span class="chip">Mentorship</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="project" data-idx="4">
+    <div class="sec-head"><span class="sec-num mono">04</span><div><div class="sec-tag">Flagship build</div><h2>Healthcare App</h2></div></div>
+    <div class="project-card">
+      <div class="project-visual">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 88C50 88 15 65 15 38C15 22 27 12 40 12C45 12 49 15 50 20C51 15 55 12 60 12C73 12 85 22 85 38C85 65 50 88 50 88Z" stroke="#faf6ef" stroke-width="2.5"/>
+          <path d="M20 45 H38 L44 30 L52 60 L58 42 L64 45 H82" stroke="#faf6ef" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="project-tag">Own project · Solo build</div>
+        <h3>Healthcare App</h3>
+        <p>A full-stack healthcare application built independently end to end — front end in React, back end in Node and Express, data modeled in MongoDB. <em style="color:var(--ink-soft); font-style:italic;">(Add a sentence on the core feature — appointments, records, reminders, whatever it actually does — so this reads as specifically yours.)</em></p>
+        <div class="project-links"><a href="#">Source</a><a href="#">Live demo</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" data-idx="5">
+    <div class="sec-head"><span class="sec-num mono">05</span><div><div class="sec-tag">Toolkit</div><h2>Stack</h2></div></div>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h4>Frontend</h4>
+        <ul>
+          <li>React.js</li>
+          <li>HTML5</li>
+          <li>CSS3</li>
+          <li>Bootstrap</li>
+          <li>Responsive Design</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h4>Backend</h4>
+        <ul>
+          <li>Node.js</li>
+          <li>Express.js</li>
+          <li>RESTful APIs</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h4>Database</h4>
+        <ul>
+          <li>MongoDB</li>
+          <li>Mongoose</li>
+          <li>Firestore</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h4>Tools</h4>
+        <ul>
+          <li>Git &amp; GitHub</li>
+          <li>VS Code</li>
+          <li>Postman</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-idx="6">
+    <div class="sec-head"><span class="sec-num mono">06</span><div><div class="sec-tag">Direct line</div><h2>Get in touch</h2></div></div>
+    <div class="contact-shell">
+      <div>
+        <div class="field"><label for="f-name">Name</label><input id="f-name" type="text" placeholder="Your name"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@company.com"></div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" rows="4" placeholder="What are you building?"></textarea></div>
+        <button class="btn btn-primary" type="button" onclick="alert('Design demo — wire this up to a backend or a service like Formspree to make it live.')">Send message</button>
+      </div>
+      <div class="contact-side">
+        <p>Open to full-time roles and freelance work. Usually replies within a day.</p>
+        <div class="contact-link-row"><b>EMAIL</b> dixitastha201@gmail.com</div>
+        <div class="contact-link-row"><b>PHONE</b> +91 94555 15545</div>
+        <div class="contact-link-row"><b>LINKEDIN</b> in/asthadixitrkm</div>
+        <div class="contact-link-row"><b>LOCATION</b> Kanpur, India</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Designed &amp; built for Astha Dixit © 2026.</footer>
+
+<script>
+(function(){
+  const path = document.getElementById('pulsePath');
+  const total = path.getTotalLength();
+  path.style.strokeDasharray = total;
+  path.style.strokeDashoffset = total;
+
+  function updatePulse(){
+    const scrollTop = window.scrollY;
+    const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = Math.min(1, Math.max(0, scrollTop/scrollH));
+    path.style.strokeDashoffset = total - (total*progress);
+  }
+  window.addEventListener('scroll', updatePulse, {passive:true});
+  window.addEventListener('resize', updatePulse);
+  updatePulse();
+
+  const readNum = document.getElementById('readNum');
+  const sections = Array.from(document.querySelectorAll('[data-idx]'));
+  const seen = new Set();
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        seen.add(parseInt(e.target.getAttribute('data-idx'),10));
+        readNum.textContent = seen.size;
+      }
+    });
+  }, {threshold:0.35});
+  sections.forEach(s=>obs.observe(s));
+})();
+</script>
+
+</body>
+</html>
